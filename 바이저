@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>겨울 느낌 사이트</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        /* 배경을 파란색으로 만들어요 */
+        body {
+            background: linear-gradient(to bottom, #1a3a52, #2d5a7b);
+            color: white;
+            font-family: 'Arial', sans-serif;
+            min-height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        /* 눈이 떨어지는 효과를 위한 컨테이너 */
+        .snowflake {
+            position: fixed;
+            top: -10px;
+            color: white;
+            font-size: 1.5em;
+            z-index: 1;
+            user-select: none;
+            pointer-events: none;
+            animation: fall linear forwards;
+        }
+        
+        /* 눈이 아래로 떨어지는 애니메이션 */
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) translateX(100px);
+                opacity: 0;
+            }
+        }
+        
+        /* 메인 콘텐츠 */
+        .container {
+            text-align: center;
+            padding: 50px 20px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            animation: glow 2s ease-in-out infinite;
+        }
+        
+        /* 제목이 반짝이는 효과 */
+        @keyframes glow {
+            0%, 100% { text-shadow: 2px 2px 4px rgba(0,0,0,0.5), 0 0 10px rgba(255,255,255,0.5); }
+            50% { text-shadow: 2px 2px 4px rgba(0,0,0,0.5), 0 0 20px rgba(100,200,255,0.8); }
+        }
+        
+        p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+        }
+        
+        /* 버튼 스타일 */
+        button {
+            background-color: #4db8ff;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1.1em;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+        
+        button:hover {
+            background-color: #2d9ccc;
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>❄️ 겨울에 오신 것을 환영해요! ❄️</h1>
+        <p>따뜻한 마음으로 맞이하는 추운 겨울이에요</p>
+        <button>버튼을 눌러봐요 👉</button>
+    </div>
+
+    <script>
+        /* 눈 효과를 만드는 자바스크립트 */
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            snowflake.innerHTML = '❄';
+            
+            // 눈이 화면 가로로 랜덤하게 떨어져요
+            const randomX = Math.random() * window.innerWidth;
+            snowflake.style.left = randomX + 'px';
+            
+            // 눈이 떨어지는 속도를 랜덤으로 줘요 (3~8초)
+            const randomDuration = Math.random() * 5 + 3;
+            snowflake.style.animationDuration = randomDuration + 's';
+            
+            document.body.appendChild(snowflake);
+            
+            // 눈이 다 떨어지면 삭제해요
+            setTimeout(() => {
+                snowflake.remove();
+            }, randomDuration * 1000);
+        }
+        
+        // 계속 눈이 떨어지도록 해요
+        setInterval(createSnowflake, 300);
+        
+        // 버튼 클릭했을 때
+        document.querySelector('button').addEventListener('click', function() {
+            alert('겨울 정말 좋아요! ❄️');
+        });
+    </script>
+</body>
+</html>
